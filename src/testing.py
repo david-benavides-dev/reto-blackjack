@@ -1,8 +1,8 @@
 
 ################################################################################
 # TODO
-# - Crear funcion para importar cartas a la mano de los jugadores.                  <- semidone
-# - Funcion for que itere por la mano del jugador y diga cuantos puntos tiene.      
+# - Crear funcion para importar cartas a la mano de los jugadores.                  <- DONE
+# - Funcion for que itere por la mano del jugador y diga cuantos puntos tiene.      <- DONE
 # - 
 # -
 ################################################################################
@@ -85,7 +85,17 @@ def sumar_cartas_jugador(mano_jugador: str) -> str:
     print(f"CARTA {carta} DE COSTE {coste_de_carta(carta)} añadida a la mano del jugador correctamente.")
     return mano_jugador
 
-def mostrar_mano_jugador(mano_jugador) -> str:
+
+# Funcion para sumar el total de puntos de la mano del jugador
+def sumar_puntos_jugador(mano_jugador: str) -> int:
+    coste_total = 0
+    for cartas in mano_jugador:
+        coste_total += coste_de_carta(cartas)
+    return coste_total
+
+
+#
+def mostrar_mano_jugador(mano_jugador: str) -> str:
     
     return f"Tu mano contiene las siguientes cartas: "
 
@@ -103,6 +113,7 @@ def main():
     while len(mano_jugador) < 4:
         mano_jugador = sumar_cartas_jugador(mano_jugador)
         print("Mano del jugador: " + mano_jugador)
+        print(f"COSTE_TOTAL_MANO_JUGADOR: {sumar_puntos_jugador(mano_jugador)}")
         print("MAZO_ACTUAL -> " + mazo_inicial)
         input("PRESIONA ENTER")
 
