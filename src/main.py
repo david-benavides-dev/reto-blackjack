@@ -35,7 +35,6 @@
 # 	8. Cada jugador pide una carta por turno o se planta. Como mínimo un jugador debe solicitar una carta, es decir, la primera vez no se le da la opción a plantarse. Pero el resto de turnos si.
 # 	9. El juego acaba cuando ambos jugadores se plantan. Mientras que un jugador no se pase de 21 puntos y no se plante se debe preguntar si quiere una carta más.
 # 	10. Cuando finaliza el juego se debe mostrar lo siguiente (4 posibilidades):
-from random import randint
 
 BARAJA = "A234567890JKQ"
 
