@@ -35,6 +35,26 @@
 # 	8. Cada jugador pide una carta por turno o se planta. Como mínimo un jugador debe solicitar una carta, es decir, la primera vez no se le da la opción a plantarse. Pero el resto de turnos si.
 # 	9. El juego acaba cuando ambos jugadores se plantan. Mientras que un jugador no se pase de 21 puntos y no se plante se debe preguntar si quiere una carta más.
 # 	10. Cuando finaliza el juego se debe mostrar lo siguiente (4 posibilidades):
+# 
+# JUEGO TERMINADO - Ronda 3
+# Game over ¡Los dos os habéis pasado!
+# J1 - jugador1 - 4K9 (23)
+# J2 - jugador2 - J70 (27)
+# 
+# JUEGO TERMINADO - Ronda 3
+# ¡Empate!
+# J1 - jugador1 - 4K5 (19)
+# J2 - jugador2 - A9 (19)
+# 
+# JUEGO TERMINADO - Ronda 3
+# ¡Gana J1 - jugador1!
+# J1 - jugador1 - JQA (21)
+# J2 - jugador2 - 491J (24)
+# 
+# JUEGO TERMINADO - Ronda 3
+# ¡Gana J2 - jugador2!
+# J1 - jugador1 - 3K5 (18)
+# J2 - jugador2 - 28Q (20)
 
 BARAJA = "A234567890JKQ"
 
