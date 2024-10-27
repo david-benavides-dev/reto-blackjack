@@ -11,7 +11,6 @@ from random import randint
 BARAJA = "A234567890JKQ"
 
 
-
 # FUNCION PARA GENERAR MAZO
 def generar_mazo() -> str:
     """
@@ -73,7 +72,7 @@ def coste_de_carta(carta) -> int:
     return carta
 
 
-# TODO Funcion para sumar cartas a la mano del player
+# TODO Funcion para sumar cartas a la mano del player.
 def sumar_cartas_jugador(mano_jugador: str) -> str:
     global mazo_inicial
     if mazo_inicial == "":
@@ -86,7 +85,7 @@ def sumar_cartas_jugador(mano_jugador: str) -> str:
     return mano_jugador
 
 
-# Funcion para sumar el total de puntos de la mano del jugador
+# Funcion para sumar el total de puntos de la mano del jugador.
 def sumar_puntos_jugador(mano_jugador: str) -> int:
     coste_total = 0
     for cartas in mano_jugador:
@@ -94,10 +93,9 @@ def sumar_puntos_jugador(mano_jugador: str) -> int:
     return coste_total
 
 
-#
+# Funcion para mostrar las cartas que tiene la mano del jugador y la suma de puntos de la misma.
 def mostrar_mano_jugador(mano_jugador: str) -> str:
-    
-    return f"Tu mano contiene las siguientes cartas: "
+    return f"Tu mano contiene las siguientes cartas: {mano_jugador}. Tienes una cantidad de {sumar_puntos_jugador(mano_jugador)} puntos."
 
 
 def main():
@@ -115,6 +113,8 @@ def main():
         print("Mano del jugador: " + mano_jugador)
         print(f"COSTE_TOTAL_MANO_JUGADOR: {sumar_puntos_jugador(mano_jugador)}")
         print("MAZO_ACTUAL -> " + mazo_inicial)
+        input("PRESIONA ENTER")
+        print (mostrar_mano_jugador(mano_jugador))
         input("PRESIONA ENTER")
 
 
