@@ -92,6 +92,9 @@ def restar_carta_azar(baraja_juego) -> str:
 
 
 def sumar_puntos_jugador(mano_jugador: str) -> int:
+    """
+    
+    """
     coste_total = 0
     for cartas in mano_jugador:
         coste_total += coste_de_carta(cartas)
@@ -99,6 +102,9 @@ def sumar_puntos_jugador(mano_jugador: str) -> int:
 
 
 def sumar_cartas_jugador(mano_jugador: str) -> str:
+    """
+    
+    """
     global mazo_inicial
     if mazo_inicial == "":
         print("No hay cartas en el mazo.")
@@ -110,6 +116,9 @@ def sumar_cartas_jugador(mano_jugador: str) -> str:
 
 
 def mostrar_mano_jugador(nombre_jugador: str, mano_jugador: str) -> str:
+    """
+    
+    """
     return f"{nombre_jugador} - {mano_jugador} ({(sumar_puntos_jugador(mano_jugador))})"
 
 
@@ -174,7 +183,18 @@ def preguntar_modo_juego() -> int:
         jugadores = None
 
 
+# TODO ver2 de coste carta maybe?
 def coste_de_carta(carta) -> int:
+    if carta == "A":
+        return 1
+    elif "2" <= carta <= "9":
+        return int(carta)
+    elif carta in "0JQK":
+        return 10
+
+
+def coste_de_carta_2(carta) -> int:
+    # TODO Simplificar el resultado <- DONE en ver2 maybe?
     """
     
     """
@@ -196,7 +216,6 @@ def coste_de_carta(carta) -> int:
         carta = 8
     elif carta == "9":
         carta = 9
-    # NOTE: Arreglado valores de los palos.
     elif carta in "0JQK":
         carta = 10
     return carta
@@ -213,14 +232,22 @@ def jugar(modo_juego: int):
         global mazo_inicial
         mazo_inicial = generar_mazo()
         clear()
-        # Preguntamos y establecemos los nombres del jugador 1 y 2
-        nombre_jugador_1 = "J1 - " + input("Introduce el nombre del jugador uno: ")
+        # Preguntamos y establecemos los nombres del jugador 1 y 2.
+        # TODO Crear funcion para crear y formatear los nombres correctamente.
+        nombre_jugador_1 = input("Introduce el nombre del jugador uno: ").strip()
+        if nombre_jugador_1 == "":
+            nombre_jugador_1 = "jugador_1"
+        nombre_jugador_1 = "J1 - " + nombre_jugador_1
         print(f"{nombre_jugador_1}\n")
 
-        nombre_jugador_2 = "J2 - " + input("Introduce el nombre del jugador dos: ")
+        nombre_jugador_2 = input("Introduce el nombre del jugador dos: ").strip()
+        if nombre_jugador_2 == "":
+            nombre_jugador_2 = "jugador_2"
+        nombre_jugador_1 = "J1 - " + nombre_jugador_2
         print(f"{nombre_jugador_2}")
 
         input("¿Comenzar juego?...")
+        clear()
 
         # Inicializamos la mano de los dos jugadores con dos empty strings
         mano_jugador_1 = ""
