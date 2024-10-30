@@ -1,8 +1,6 @@
 
 ################################################################################
 # TODO
-# - Crear funcion para importar cartas a la mano de los jugadores.                  <- DONE
-# - Funcion for que itere por la mano del jugador y diga cuantos puntos tiene.      <- DONE
 # - 
 # -
 ################################################################################

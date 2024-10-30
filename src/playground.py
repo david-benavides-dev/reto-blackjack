@@ -1,3 +1,8 @@
+################################################################################
+# WORKING EN PRUEBA LÓGICA DE MAIN
+################################################################################
+
+
 # Al entrar debe preguntar el modo de juego:
 #     1. Dos jugadores.
 #     2. Un jugador contra la máquina.
