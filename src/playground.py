@@ -248,24 +248,75 @@ def jugar(modo_juego: int):
         nombre_jugador_2 = input("Introduce el nombre del jugador dos: ").strip()
         if nombre_jugador_2 == "":
             nombre_jugador_2 = "jugador_2"
-        nombre_jugador_1 = "J1 - " + nombre_jugador_2
+        nombre_jugador_2 = "J2 - " + nombre_jugador_2
         print(f"{nombre_jugador_2}")
 
-        input("¿Comenzar juego?...")
+        input("\nPulsa ENTER para comenzar...")
         clear()
 
         # Inicializamos la mano de los dos jugadores con dos empty strings
         mano_jugador_1 = ""
         mano_jugador_2 = ""
+        # En la primera ronda, los dos jugadores comienzan con dos cartas
+        for _ in range(2):
+            mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
+            mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
 
-        while rondas < 3:
-            # if rondas == 3:
-                mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
-                mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
-                print(mostrar_mano_jugador(nombre_jugador_1, mano_jugador_1))
-                print(mostrar_mano_jugador(nombre_jugador_2, mano_jugador_2))
-                rondas +=1
-                input()
+        #TODO PROBANDO INICIALIZACION JUEGO MANOS 2 CARTAS
+        print(mostrar_mano_jugador(nombre_jugador_1, mano_jugador_1))
+        print(mostrar_mano_jugador(nombre_jugador_2, mano_jugador_2))
+        input()
+        
+
+        # while rondas < 3:
+        #     # if rondas == 3:
+        #         clear()
+        #         mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
+        #         mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+        #         print(mostrar_mano_jugador(nombre_jugador_1, mano_jugador_1))
+        #         print(mostrar_mano_jugador(nombre_jugador_2, mano_jugador_2))
+        #         rondas +=1
+        #         input()
+        #         if rondas == 3 or sumar_puntos_jugador(mano_jugador_1) > 21 and sumar_puntos_jugador(mano_jugador_2) > 21:
+        #             print(mostrar_mano_jugador(nombre_jugador_1, mano_jugador_1))
+        #             print(mostrar_mano_jugador(nombre_jugador_2, mano_jugador_2))
+        #             print(f"Empate!")
+        #             if input("¿Jugar de nuevo?\nS/N: ").lower() == "s":
+        #                 modo_juego = preguntar_modo_juego()
+        #                 jugar(modo_juego)
+        #             else:
+        #                 print("Bye bye...")
+        #                 break
+        #         elif sumar_puntos_jugador(mano_jugador_1) == 21 and sumar_puntos_jugador(mano_jugador_2) > 21:
+        #             print(mostrar_mano_jugador(nombre_jugador_1, mano_jugador_1))
+        #             print(mostrar_mano_jugador(nombre_jugador_2, mano_jugador_2))
+        #             print(f"Gana {nombre_jugador_1}!")
+        #             if input("¿Jugar de nuevo?\nS/N: ").lower() == "s":
+        #                 modo_juego = preguntar_modo_juego()
+        #                 jugar(modo_juego)
+        #             else:
+        #                 print("Bye bye...")
+        #                 break
+        #         elif sumar_puntos_jugador(mano_jugador_2) == 21 and sumar_puntos_jugador(mano_jugador_1)> 21:
+        #             print(mostrar_mano_jugador(nombre_jugador_1, mano_jugador_1))
+        #             print(mostrar_mano_jugador(nombre_jugador_2, mano_jugador_2))
+        #             print(f"Gana {nombre_jugador_2}!")
+        #             if input("¿Jugar de nuevo?\nS/N: ").lower() == "s":
+        #                 modo_juego = preguntar_modo_juego()
+        #                 jugar(modo_juego)
+        #             else:
+        #                 print("Bye bye...")
+        #                 break
+        #         elif rondas == 3 or sumar_puntos_jugador(mano_jugador_1) > 21 and sumar_puntos_jugador(mano_jugador_2) > 21:
+        #             print(mostrar_mano_jugador(nombre_jugador_1, mano_jugador_1))
+        #             print(mostrar_mano_jugador(nombre_jugador_2, mano_jugador_2))
+        #             print(f"Empate!")
+        #             if input("¿Jugar de nuevo?\nS/N: ").lower() == "s":
+        #                 modo_juego = preguntar_modo_juego()
+        #                 jugar(modo_juego)
+        #             else:
+        #                 print("Bye bye...")
+        #                 break
 
 
 
@@ -275,10 +326,8 @@ def jugar(modo_juego: int):
 
 
 def main():
-    empezar_juego = None
-    while empezar_juego is None:
-        modo_juego = preguntar_modo_juego()
-        jugar(modo_juego)
+    modo_juego = preguntar_modo_juego()
+    jugar(modo_juego)
 
 
     # jugar()
