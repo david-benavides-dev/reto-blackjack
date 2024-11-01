@@ -179,13 +179,14 @@ def preguntar_modo_juego() -> int:
     print("1. Dos jugadores.")
     print("2. Un jugador contra la máquina.")
     while jugadores is None:
-        jugadores = pedir_num("Introduzca el modo de juego que deseas: ")
-        if validar_modo_juego(jugadores) is True:
-            if escojer_modo_juego(jugadores) == 1:
-                return 1
-            return 2
-        print("**ERROR** Debes introducir un número correcto.")
-        jugadores = None
+        try:
+            jugadores = pedir_num("Introduzca el modo de juego que deseas: ")
+            if validar_modo_juego(jugadores) is True:
+                if escojer_modo_juego(jugadores) == 1:
+                    return 1
+                return 2
+        except ValueError:
+            print("**ERROR** Debes introducir un número correcto.")
 
 
 # TODO ver2 de coste carta maybe?
@@ -226,6 +227,13 @@ def coste_de_carta_2(carta) -> int:
     return carta
 
 
+def definir_nombre_jugador():
+    pass
+
+def mostrar_info_ronda():
+    pass
+
+
 def jugar(modo_juego: int):
     """
     
@@ -244,14 +252,16 @@ def jugar(modo_juego: int):
             nombre_jugador_1 = "jugador_1"
         nombre_jugador_1 = "J1 - " + nombre_jugador_1
         print(f"{nombre_jugador_1}\n")
+        clear()
 
         nombre_jugador_2 = input("Introduce el nombre del jugador dos: ").strip()
         if nombre_jugador_2 == "":
             nombre_jugador_2 = "jugador_2"
         nombre_jugador_2 = "J2 - " + nombre_jugador_2
         print(f"{nombre_jugador_2}")
-
-        input("\nPulsa ENTER para comenzar...")
+        clear()
+        print(f"Los jugadores de esta partida son:\n{nombre_jugador_1}\n{nombre_jugador_2}")
+        input("\nPulsa ENTER para comenzar la partida...")
         clear()
 
         # Inicializamos la mano de los dos jugadores con dos empty strings
