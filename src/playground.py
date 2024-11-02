@@ -226,15 +226,20 @@ def coste_de_carta_2(carta) -> int:
         carta = 10
     return carta
 
-
+#TODO
 # Función para definir el nombre del jugador en concreto.
-def definir_nombre_jugador() -> str:
-    pass
+def definir_nombre_jugador(numero_jugador = "") -> str:
+    nombre_jugador = input("Introduce el nombre del jugador uno: ").strip()
+    if nombre_jugador == "":
+        nombre_jugador = f"jugador_{numero_jugador}"
+    nombre_jugador = f"J{numero_jugador} - " + nombre_jugador
+    print(f"{nombre_jugador}\n")
+    return nombre_jugador
 
-
+#TODO
 # Funcion que irá mostrando la información de cada ronda.
 def mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2) -> str:
-    pass
+    return f""
 
 
 def jugar(modo_juego: int):
