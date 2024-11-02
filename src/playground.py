@@ -227,10 +227,13 @@ def coste_de_carta_2(carta) -> int:
     return carta
 
 
-def definir_nombre_jugador():
+# Función para definir el nombre del jugador en concreto.
+def definir_nombre_jugador() -> str:
     pass
 
-def mostrar_info_ronda():
+
+# Funcion que irá mostrando la información de cada ronda.
+def mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2) -> str:
     pass
 
 
