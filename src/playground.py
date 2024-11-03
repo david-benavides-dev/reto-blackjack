@@ -67,6 +67,7 @@ from utils import *
 BARAJA = "A234567890JKQ"
 MODOS_JUEGO_VALIDOS = 1, 2
 
+
 def generar_mazo() -> str:
     """
     
@@ -86,14 +87,14 @@ def seleccionar_carta_azar(baraja_juego) -> str:
     return ""
 
 
-def restar_carta_azar(baraja_juego) -> str:
-    """
+# def restar_carta_azar(baraja_juego) -> str:
+#     """
     
-    """
-    restar_carta = seleccionar_carta_azar(baraja_juego)
-    if baraja_juego != "":
-        baraja_juego = baraja_juego.replace(restar_carta, "", 1)
-    return baraja_juego
+#     """
+#     restar_carta = seleccionar_carta_azar(baraja_juego)
+#     if baraja_juego != "":
+#         baraja_juego = baraja_juego.replace(restar_carta, "", 1)
+#     return baraja_juego
 
 
 def sumar_puntos_jugador(mano_jugador: str) -> int:
@@ -189,7 +190,6 @@ def preguntar_modo_juego() -> int:
             print("**ERROR** Debes introducir un número correcto.")
 
 
-# TODO ver2 de coste carta maybe?
 def coste_de_carta(carta) -> int:
     if carta == "A":
         return 1
@@ -199,32 +199,33 @@ def coste_de_carta(carta) -> int:
         return 10
 
 
-def coste_de_carta_2(carta) -> int:
-    # TODO Simplificar el resultado <- DONE en ver2 maybe?
-    """
+# def coste_de_carta_2(carta) -> int:
+#     # TODO Simplificar el resultado <- DONE en ver2 maybe?
+#     """
     
-    """
-    if carta == "A":
-        carta = 1
-    elif carta == "2":
-        carta = 2
-    elif carta == "3":
-        carta = 3
-    elif carta == "4":
-        carta = 4
-    elif carta == "5":
-        carta = 5
-    elif carta == "6":
-        carta = 6
-    elif carta == "7":
-        carta = 7
-    elif carta == "8":
-        carta = 8
-    elif carta == "9":
-        carta = 9
-    elif carta in "0JQK":
-        carta = 10
-    return carta
+#     """
+#     if carta == "A":
+#         carta = 1
+#     elif carta == "2":
+#         carta = 2
+#     elif carta == "3":
+#         carta = 3
+#     elif carta == "4":
+#         carta = 4
+#     elif carta == "5":
+#         carta = 5
+#     elif carta == "6":
+#         carta = 6
+#     elif carta == "7":
+#         carta = 7
+#     elif carta == "8":
+#         carta = 8
+#     elif carta == "9":
+#         carta = 9
+#     elif carta in "0JQK":
+#         carta = 10
+#     return carta
+
 
 #TODO
 # Función para definir el nombre del jugador en concreto.
@@ -235,6 +236,7 @@ def definir_nombre_jugador(numero_jugador = "") -> str:
     nombre_jugador = f"J{numero_jugador} - " + nombre_jugador
     print(f"{nombre_jugador}\n")
     return nombre_jugador
+
 
 #TODO
 # Funcion que irá mostrando la información de cada ronda.
