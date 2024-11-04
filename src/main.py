@@ -1,8 +1,3 @@
-################################################################################
-# WORKING EN PRUEBA LÓGICA DE MAIN
-################################################################################
-
-
 # Al entrar debe preguntar el modo de juego:
 #     1. Dos jugadores.
 #     2. Un jugador contra la máquina.
@@ -64,7 +59,9 @@
 from random import randint
 from utils import *
 
-TITULOS = ("Juguemos al Blackjack", "Configuración inicial")
+TITULOS = ("Juguemos al Blackjack",
+            "Configuración inicial - Dos jugadores",
+            "Configuración inicial - Un jugador contra la máquina")
 
 BARAJA = "A234567890JKQ"
 MODOS_JUEGO_VALIDOS = 1, 2
@@ -166,7 +163,9 @@ def escojer_modo_juego(opcion_modo_juego: int) -> bool:
 
 def preguntar_modo_juego() -> int:
     """
-    
+    Pregunta al usuario qué modelo de juego desea inicializar, siendo 1 para dos jugadores y 2 para jugar contra un NPC.
+    Returns:
+        int: El modelo de juego elegido.
     """
     jugadores = None
     clear()
@@ -197,14 +196,17 @@ def coste_de_carta(carta) -> int:
 
 
 # Función para definir el nombre del jugador en concreto.
-def definir_nombre_jugador(numero_jugador = "") -> str:
+def definir_nombre_jugador(modo_juego: int, numero_jugador = "") -> str:
     """
     
     """
-    print(mostrar_titulo(TITULOS, 1))
-    nombre_jugador = input(f"Introduce el nombre del jugador {numero_jugador}: ").strip().capitalize()
-    if nombre_jugador == "":
-        nombre_jugador = f"jugador_{numero_jugador}"
+    print(mostrar_titulo(TITULOS, modo_juego))
+    if modo_juego == 1:
+        nombre_jugador = input(f"Introduce el nombre del jugador {numero_jugador}: ").strip().capitalize()
+        if nombre_jugador == "":
+            nombre_jugador = f"jugador_{numero_jugador}"
+    else:
+        nombre_jugador = f"MAQUINA"
     nombre_jugador = f"J{numero_jugador} - " + nombre_jugador
     clear()
     return nombre_jugador
@@ -273,11 +275,17 @@ def condicion_victoria(mano_jugador_1, mano_jugador_2) -> int:
 
     elif puntos_jugador_1 > 21 and puntos_jugador_2 > 21:
         resultado_victoria = 4
+
+    elif puntos_jugador_1 > 21:
+        resultado_victoria = 2
+
+    elif puntos_jugador_2 > 21:
+        resultado_victoria = 1
     
     elif puntos_jugador_1 - 21 > puntos_jugador_2 - 21:
         resultado_victoria = 1
 
-    else:
+    elif puntos_jugador_1 - 21 < puntos_jugador_2 - 21:
         resultado_victoria = 2
 
     return resultado_victoria
@@ -288,15 +296,17 @@ def jugar(modo_juego: int):
     """
     
     """
+    global mazo_inicial
+
     if modo_juego == 1:
         # Crea la partida, generando el mazo y creando variables default para cada jugador / reglas del juego.
-        global mazo_inicial
+
         mazo_inicial = generar_mazo()
         clear()
 
         # Preguntamos y establecemos los nombres del jugador 1 y 2.
-        nombre_jugador_1 = definir_nombre_jugador(numero_jugador = "1")
-        nombre_jugador_2 = definir_nombre_jugador(numero_jugador = "2")
+        nombre_jugador_1 = definir_nombre_jugador(modo_juego, numero_jugador = "1")
+        nombre_jugador_2 = definir_nombre_jugador(modo_juego, numero_jugador = "2")
 
         print(f"Los jugadores de esta partida son:\n\n{nombre_jugador_1}\n{nombre_jugador_2}")
         input("\nPulsa ENTER para comenzar el juego...")
@@ -306,14 +316,13 @@ def jugar(modo_juego: int):
         mano_jugador_1 = ""
         mano_jugador_2 = ""
 
-        # En la primera ronda, los dos jugadores comienzan con dos cartas
-        for _ in range(2):
-            mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
-            mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+        # En la primera ronda, los dos jugadores comienzan con una carta
+        mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
+        mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
 
         # Inicio de las rondas.
         rondas = 1
-        while rondas < 3:
+        while rondas <= 3:
             clear()
             print(mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2))
             opcion = input(f"\nJUGADOR {nombre_jugador_1} - ¿Quieres carta?: ").strip().lower()
@@ -336,13 +345,70 @@ def jugar(modo_juego: int):
         clear()
         print(mostrar_info_ronda(4, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2, jugador_ganador))
 
-        if input("\n¿Jugar de nuevo?\nS/N: ").lower() in "s" or "si":
+        if input("\n¿Jugar de nuevo?\nS/N: ").lower() == "s":
             modo_juego = preguntar_modo_juego()
             jugar(modo_juego)
         else:
             print("Bye bye...")
             exit()
 
+
+#####################################################################################################################################
+#####################################################################################################################################
+
+
+    elif modo_juego == 2:
+        # Crea la partida, generando el mazo y creando variables default para cada jugador / reglas del juego.
+        mazo_inicial = generar_mazo()
+        clear()
+
+        # Preguntamos y establecemos el nombre del jugador 1
+        nombre_jugador_1 = definir_nombre_jugador(1, numero_jugador = "1")
+        nombre_jugador_2 = definir_nombre_jugador(modo_juego, numero_jugador = "2")
+
+        print(f"Los jugadores de esta partida son:\n\n{nombre_jugador_1}\n{nombre_jugador_2}")
+        input("\nPulsa ENTER para comenzar el juego...")
+        clear()
+
+        # Inicializamos la mano de los dos jugadores con dos empty strings
+        mano_jugador_1 = ""
+        mano_jugador_2 = ""
+
+        # En la primera ronda, los dos jugadores comienzan con una carta
+        mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
+        mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+
+        # Inicio de las rondas.
+        rondas = 1
+        while rondas <= 3:
+            clear()
+            print(mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2))
+            opcion = input(f"\nJUGADOR {nombre_jugador_1} - ¿Quieres carta?: ").strip().lower()
+            if opcion == "s" or opcion == "si":
+                mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
+
+            opcion_maquina = randint(0,100)
+            if opcion_maquina > 50:
+                mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+
+            rondas += 1
+
+
+        clear()
+        print(mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2))
+        input("\n")
+
+        jugador_ganador = condicion_victoria(mano_jugador_1, mano_jugador_2)
+
+        clear()
+        print(mostrar_info_ronda(4, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2, jugador_ganador))
+
+        if input("\n¿Jugar de nuevo?\nS/N: ").lower() in "s" or "si":
+            modo_juego = preguntar_modo_juego()
+            jugar(modo_juego)
+        else:
+            print("Bye bye...")
+            exit()   
 
 def main():
     modo_juego = preguntar_modo_juego()
