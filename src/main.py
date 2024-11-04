@@ -294,7 +294,7 @@ def jugar(modo_juego: int):
         clear()
         print(mostrar_info_ronda(4, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2, jugador_ganador))
 
-        if input("\n¿Jugar de nuevo?\nS/N: ").lower() == "s":
+        if input("\n¿Jugar de nuevo?\nS/N: ").capitalize() == "S":
             modo_juego = preguntar_modo_juego()
             jugar(modo_juego)
         else:
@@ -352,12 +352,12 @@ def jugar(modo_juego: int):
         clear()
         print(mostrar_info_ronda(4, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2, jugador_ganador))
 
-        if input("\n¿Jugar de nuevo?\nS/N: ").lower() in "s" or "si":
+        if input("\n¿Jugar de nuevo?\nS/N: ").capitalize() == "S":
             modo_juego = preguntar_modo_juego()
             jugar(modo_juego)
         else:
             print("Bye bye...")
-            exit()   
+            exit()
 
 def main():
     modo_juego = preguntar_modo_juego()
