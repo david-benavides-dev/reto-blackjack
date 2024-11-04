@@ -37,7 +37,7 @@ def seleccionar_carta_azar(baraja_juego) -> str:
     return ""
 
 
-def sumar_puntos_jugador(mano_jugador: str) -> int|str:
+def sumar_puntos_jugador(mano_jugador: str) -> int:
     """
     
     """
