@@ -1,9 +1,11 @@
 # TODO: 
-# - Cambiar la funcion definir_nombre_jugador para el modo vs máquina.
 # - Hacer un cálculo diferente para el As dependiendo del valor total de la mano del jugador en cuestión.
 # - Documentar todo el código.
 # - Cleanup.
 # - Pruebas unitarias siguiendo el cálculo de pruebas válidas y no válidas.
+
+# NOTE:
+# - Cambiar la funcion definir_nombre_jugador para el modo vs máquina. <- DONE
 
 from random import randint
 from utils import *
@@ -150,12 +152,9 @@ def definir_nombre_jugador(modo_juego: int, numero_jugador = "") -> str:
     
     """
     print(mostrar_titulo(TITULOS, modo_juego))
-    if modo_juego == 1:
-        nombre_jugador = input(f"Introduce el nombre del jugador {numero_jugador}: ").strip().capitalize()
-        if nombre_jugador == "":
-            nombre_jugador = f"jugador_{numero_jugador}"
-    else:
-        nombre_jugador = f"MAQUINA"
+    nombre_jugador = input(f"Introduce el nombre del jugador {numero_jugador}: ").strip().capitalize()
+    if nombre_jugador == "":
+        nombre_jugador = f"jugador_{numero_jugador}"
     nombre_jugador = f"J{numero_jugador} - " + nombre_jugador
     clear()
     return nombre_jugador
@@ -312,8 +311,8 @@ def jugar(modo_juego: int):
         clear()
 
         # Preguntamos y establecemos el nombre del jugador 1
-        nombre_jugador_1 = definir_nombre_jugador(1, numero_jugador = "1")
-        nombre_jugador_2 = definir_nombre_jugador(modo_juego, numero_jugador = "2")
+        nombre_jugador_1 = definir_nombre_jugador(2, numero_jugador = "1")
+        nombre_jugador_2 = f"J2 - MAQUINA"
 
         print(f"Los jugadores de esta partida son:\n\n{nombre_jugador_1}\n{nombre_jugador_2}")
         input("\nPulsa ENTER para comenzar el juego...")
