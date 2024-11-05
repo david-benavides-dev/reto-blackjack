@@ -6,6 +6,7 @@
 # NOTE:
 # - Cambiar la funcion definir_nombre_jugador para el modo vs máquina. <- DONE
 # - Hacer un cálculo diferente para el As dependiendo del valor total de la mano del jugador en cuestión. <- DONE
+# - Implementar lógica para plantar jugador en el caso de no querer carta <- DONE
 
 from random import randint
 from utils import *
