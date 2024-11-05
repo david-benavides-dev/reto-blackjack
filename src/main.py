@@ -1,11 +1,11 @@
 # TODO: 
-# - Hacer un cálculo diferente para el As dependiendo del valor total de la mano del jugador en cuestión.
 # - Documentar todo el código.
 # - Cleanup.
 # - Pruebas unitarias siguiendo el cálculo de pruebas válidas y no válidas.
 
 # NOTE:
 # - Cambiar la funcion definir_nombre_jugador para el modo vs máquina. <- DONE
+# - Hacer un cálculo diferente para el As dependiendo del valor total de la mano del jugador en cuestión. <- DONE
 
 from random import randint
 from utils import *
@@ -55,7 +55,7 @@ def sumar_puntos_jugador(mano_jugador: str) -> int:
     """
     coste_total = 0
     for cartas in mano_jugador:
-        coste_total += coste_de_carta(cartas)
+        coste_total += coste_de_carta(cartas, coste_total)
     
     return coste_total
 
@@ -177,10 +177,10 @@ def preguntar_modo_juego() -> int:
             print("**ERROR** Debes introducir un número correcto.")
 
 
-def coste_de_carta(carta: str) -> int:
+def coste_de_carta(carta: str, puntuacion: int) -> int:
     """
     Calcula el valor de la carta pasada por parámetro según las reglas del Blackjack:
-    - La carta 'A' tiene un coste de 11.
+    - La carta 'A' tiene un coste de 11 de base (salvo que la puntuación del jugador vaya a exceder 21, en cuyo caso su coste es 1)
     - Las cartas del 2 al 9 tienen un coste igual a su número.
     - Las cartas '0', 'J', 'Q' y 'K' tienen un coste de 10.
 
@@ -191,6 +191,8 @@ def coste_de_carta(carta: str) -> int:
         int: El coste asociado a la carta proporcionada.
     """
     if carta == "A":
+        if puntuacion + 11 > 21:
+            return 1
         return 11
     elif "2" <= carta <= "9":
         return int(carta)
@@ -219,7 +221,7 @@ def definir_nombre_jugador(modo_juego: int, numero_jugador = "") -> str:
 
 
 def mostrar_info_ronda(rondas: int, nombre_jugador_1: str, nombre_jugador_2: str, mano_jugador_1: str, mano_jugador_2: str, resultado_victoria:int = 0) -> str:
-    """Función que irá mostrando la información de cada ronda.
+    """Muestra la información de cada ronda.
 
     Args:
         rondas (int): 
@@ -335,18 +337,28 @@ def jugar(modo_juego: int):
         mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
         mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
 
-        # Inicio de las rondas.
+        # Inicio de las rondas y declaración de variables para plantarse.
         rondas = 1
+        jugador_1_plantar = False
+        jugador_2_plantar = False
+    
         while rondas <= 3:
             clear()
             print(mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2))
-            opcion = input(f"\nJUGADOR {nombre_jugador_1} - ¿Quieres carta?: ").strip().lower()
-            if opcion == "s" or opcion == "si":
-                mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
 
-            opcion = input(f"\nJUGADOR {nombre_jugador_2} - ¿Quieres carta?: ").strip().lower()
-            if opcion == "s" or opcion == "si":
-                mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+            if jugador_1_plantar is False:
+                opcion = input(f"\nJUGADOR {nombre_jugador_1} - ¿Quieres carta?: ").strip().lower()
+                if opcion == "s" or opcion == "si":
+                    mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
+                else:
+                    jugador_1_plantar = True
+
+            if jugador_2_plantar is False:
+                opcion = input(f"\nJUGADOR {nombre_jugador_2} - ¿Quieres carta?: ").strip().lower()
+                if opcion == "s" or opcion == "si":
+                    mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+                else:
+                    jugador_2_plantar = True
 
             rondas += 1
 
@@ -366,10 +378,6 @@ def jugar(modo_juego: int):
         else:
             print("Bye bye...")
             exit()
-
-
-#####################################################################################################################################
-#####################################################################################################################################
 
 
     elif modo_juego == 2:
@@ -395,19 +403,28 @@ def jugar(modo_juego: int):
 
         # Inicio de las rondas.
         rondas = 1
+        jugador_1_plantar = False
+        jugador_2_plantar = False
+
         while rondas <= 3:
             clear()
             print(mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2))
-            opcion = input(f"\nJUGADOR {nombre_jugador_1} - ¿Quieres carta?: ").strip().lower()
-            if opcion == "s" or opcion == "si":
-                mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
 
-            opcion_maquina = randint(0,100)
-            if opcion_maquina > 50:
-                mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+            if jugador_1_plantar is False:
+                opcion = input(f"\nJUGADOR {nombre_jugador_1} - ¿Quieres carta?: ").strip().lower()
+                if opcion == "s" or opcion == "si":
+                    mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
+                else:
+                    jugador_1_plantar = True
+
+            if jugador_2_plantar is False:
+                opcion_maquina = randint(0,100)
+                if opcion_maquina > 50:
+                    mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
+                else:
+                    jugador_2_plantar = True
 
             rondas += 1
-
 
         clear()
         print(mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2))
@@ -424,6 +441,7 @@ def jugar(modo_juego: int):
         else:
             print("Bye bye...")
             exit()
+
 
 def main():
     modo_juego = preguntar_modo_juego()
