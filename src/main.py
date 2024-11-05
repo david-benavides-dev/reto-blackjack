@@ -1,4 +1,5 @@
 # TODO: 
+# - Palos
 # - Documentar todo el código.
 # - Cleanup.
 # - Pruebas unitarias siguiendo el cálculo de pruebas válidas y no válidas.
@@ -16,6 +17,8 @@ TITULOS = ("Juguemos al Blackjack",
             "Configuración inicial - Un jugador contra la máquina")
 
 BARAJA = "A234567890JKQ"
+PALOS = "♠♥♦♣"
+
 MODOS_JUEGO_VALIDOS = 1, 2
 
 
@@ -202,7 +205,7 @@ def coste_de_carta(carta: str, puntuacion: int) -> int:
 
 
 # Función para definir el nombre del jugador en concreto.
-def definir_nombre_jugador(modo_juego: int, numero_jugador = "") -> str:
+def definir_nombre_jugador(modo_juego: int, numero_jugador: str = "") -> str:
     """
 
     Args:
@@ -221,7 +224,7 @@ def definir_nombre_jugador(modo_juego: int, numero_jugador = "") -> str:
     return nombre_jugador
 
 
-def mostrar_info_ronda(rondas: int, nombre_jugador_1: str, nombre_jugador_2: str, mano_jugador_1: str, mano_jugador_2: str, resultado_victoria:int = 0) -> str:
+def mostrar_info_ronda(rondas: int, nombre_jugador_1: str, nombre_jugador_2: str, mano_jugador_1: str, mano_jugador_2: str, resultado_victoria: int = 0) -> str:
     """Muestra la información de cada ronda.
 
     Args:
@@ -274,7 +277,7 @@ def mostrar_titulo(TITULOS: str, pos_titulo: int) -> str:
 
 
 # Funcion para determinar el ganador.
-def condicion_victoria(mano_jugador_1, mano_jugador_2) -> int:
+def condicion_victoria(mano_jugador_1: str, mano_jugador_2: str) -> int:
     """
 
     """
