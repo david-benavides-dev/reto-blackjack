@@ -19,8 +19,10 @@ MODOS_JUEGO_VALIDOS = 1, 2
 
 
 def generar_mazo() -> str:
-    """
-    
+    """Genera un mazo multiplicando el valor de la constante BARAJA cuatro veces, asignandole el valor total a baraja_completa.
+
+    Returns:
+        str: La baraja completa.
     """
     baraja_completa: str = ""
     for _ in range (4):
@@ -30,7 +32,12 @@ def generar_mazo() -> str:
 
 def seleccionar_carta_azar(baraja_juego) -> str:
     """
-    
+
+    Args:
+        bajara_juego (str): 
+
+    Returns:
+        baraja_juego (str): 
     """
     if baraja_juego != "":
         return baraja_juego[randint(0, len(baraja_juego) - 1)]
@@ -39,7 +46,12 @@ def seleccionar_carta_azar(baraja_juego) -> str:
 
 def sumar_puntos_jugador(mano_jugador: str) -> int:
     """
-    
+
+    Args:
+        mano_jugador (str): 
+
+    Returns:
+        coste_total (int): 
     """
     coste_total = 0
     for cartas in mano_jugador:
@@ -50,7 +62,12 @@ def sumar_puntos_jugador(mano_jugador: str) -> int:
 
 def sumar_cartas_jugador(mano_jugador: str) -> str:
     """
-    
+
+    Args:
+        mano_jugador (str): 
+
+    Returns:
+        mano_jugador (str): 
     """
     global mazo_inicial
     if mazo_inicial == "":
@@ -64,14 +81,25 @@ def sumar_cartas_jugador(mano_jugador: str) -> str:
 
 def mostrar_mano_jugador(nombre_jugador: str, mano_jugador: str) -> str:
     """
-    
+
+    Args:
+        nombre_jugador (str): 
+        mano_jugador (str): 
+
+    Returns:
+        str: 
     """
     return f"{nombre_jugador} - {mano_jugador} ({(sumar_puntos_jugador(mano_jugador))})"
 
 
 def pedir_num(msg: str) -> int:
     """
-    
+
+    Args:
+        msg (str): 
+
+    Returns:
+        int: 
     """
     numero = None
     while numero == None:
@@ -85,7 +113,12 @@ def pedir_num(msg: str) -> int:
 
 def validar_num(numero: str) -> bool:
     """
-    
+
+    Args:
+        numero (str): 
+
+    Returns:
+        bool: 
     """
     try:
         int(numero)
@@ -96,7 +129,12 @@ def validar_num(numero: str) -> bool:
 
 def validar_modo_juego(modo_juego: int) -> bool:
     """
-    
+
+    Args:
+        modo_juego (int): 
+
+    Returns:
+        bool: 
     """
     if modo_juego not in MODOS_JUEGO_VALIDOS:
         return False
@@ -105,7 +143,12 @@ def validar_modo_juego(modo_juego: int) -> bool:
 
 def escojer_modo_juego(opcion_modo_juego: int) -> bool:
     """
-    
+
+    Args:
+        opcion_modo_juego (int): 
+
+    Returns:
+        int: 
     """
     if opcion_modo_juego == MODOS_JUEGO_VALIDOS[0]:
         return 1
@@ -113,10 +156,10 @@ def escojer_modo_juego(opcion_modo_juego: int) -> bool:
 
 
 def preguntar_modo_juego() -> int:
-    """
-    Pregunta al usuario qué modelo de juego desea inicializar, siendo 1 para dos jugadores y 2 para jugar contra un NPC.
+    """Solicita al usuario el modo de juego desea, siendo 1 para dos jugadores y 2 para jugar contra un NPC.
+
     Returns:
-        int: El modelo de juego elegido.
+        int: El modo de juego elegido.
     """
     jugadores = None
     clear()
@@ -134,12 +177,21 @@ def preguntar_modo_juego() -> int:
             print("**ERROR** Debes introducir un número correcto.")
 
 
-def coste_de_carta(carta) -> int:
+def coste_de_carta(carta: str) -> int:
     """
-    
+    Calcula el valor de la carta pasada por parámetro según las reglas del Blackjack:
+    - La carta 'A' tiene un coste de 11.
+    - Las cartas del 2 al 9 tienen un coste igual a su número.
+    - Las cartas '0', 'J', 'Q' y 'K' tienen un coste de 10.
+
+    Args:
+        carta (str): La carta cuyo coste se va a calcular.
+
+    Returns:
+        int: El coste asociado a la carta proporcionada.
     """
     if carta == "A":
-        return 1
+        return 11
     elif "2" <= carta <= "9":
         return int(carta)
     elif carta in "0JQK":
@@ -149,7 +201,13 @@ def coste_de_carta(carta) -> int:
 # Función para definir el nombre del jugador en concreto.
 def definir_nombre_jugador(modo_juego: int, numero_jugador = "") -> str:
     """
-    
+
+    Args:
+        modo_juego (int): 
+        numero_jugador (str): 
+
+    Returns:
+        nombre_jugador (str): 
     """
     print(mostrar_titulo(TITULOS, modo_juego))
     nombre_jugador = input(f"Introduce el nombre del jugador {numero_jugador}: ").strip().capitalize()
@@ -160,10 +218,19 @@ def definir_nombre_jugador(modo_juego: int, numero_jugador = "") -> str:
     return nombre_jugador
 
 
-# Función que irá mostrando la información de cada ronda.
 def mostrar_info_ronda(rondas: int, nombre_jugador_1: str, nombre_jugador_2: str, mano_jugador_1: str, mano_jugador_2: str, resultado_victoria:int = 0) -> str:
-    """
+    """Función que irá mostrando la información de cada ronda.
 
+    Args:
+        rondas (int): 
+        nombre_jugador_1 (str):
+        nombre_jugador_2 (str):
+        mano_jugador_1 (str):
+        mano_jugador_2 (str):
+        resultado_victoria (int):
+
+    Returns:
+        str:
     """
     rondas_string = ""
 
