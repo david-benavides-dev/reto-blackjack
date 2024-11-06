@@ -2,13 +2,6 @@
 # - Cleanup.
 # - Pruebas unitarias siguiendo el cálculo de pruebas válidas y no válidas.
 
-# NOTE:
-# - Cambiar la funcion definir_nombre_jugador para el modo vs máquina. <- DONE
-# - Hacer un cálculo diferente para el As dependiendo del valor total de la mano del jugador en cuestión. <- DONE
-# - Implementar lógica para plantar jugador en el caso de no querer carta <- DONE
-# - Palos <- DONE
-# - Documentar todo el código. <- DONE (falta cleanup)
-
 from random import randint
 from os import system, name
 
@@ -425,7 +418,6 @@ def jugar(modo_juego: int):
 
     if modo_juego == 1:
         # Crea la partida, generando el mazo y creando variables default para cada jugador / reglas del juego.
-
         mazo_inicial = generar_mazo()
         clear()
 
@@ -494,7 +486,7 @@ def jugar(modo_juego: int):
         mazo_inicial = generar_mazo()
         clear()
 
-        # Preguntamos y establecemos el nombre del jugador 1
+        # Preguntamos y establece el nombre del jugador 1
         nombre_jugador_1 = definir_nombre_jugador(2, numero_jugador = "1")
         nombre_jugador_2 = f"J2 - MAQUINA"
 
@@ -502,19 +494,20 @@ def jugar(modo_juego: int):
         input("\nPulsa ENTER para comenzar el juego...")
         clear()
 
-        # Inicializamos la mano de los dos jugadores con dos empty strings
+        # Inicializa la mano de los dos jugadores.
         mano_jugador_1 = ""
         mano_jugador_2 = ""
 
-        # En la primera ronda, los dos jugadores comienzan con una carta
+        # En la primera ronda, los dos jugadores comienzan con una carta.
         mano_jugador_1 = sumar_cartas_jugador(mano_jugador_1)
         mano_jugador_2 = sumar_cartas_jugador(mano_jugador_2)
 
-        # Inicio de las rondas.
+        # Variables de control para las rondas y plantarse.
         rondas = 1
         jugador_1_plantar = False
         jugador_2_plantar = False
 
+        # Bucle principal del juego (3 rondas).
         while rondas <= 3:
             clear()
             print(mostrar_info_ronda(rondas, nombre_jugador_1, nombre_jugador_2, mano_jugador_1, mano_jugador_2))
