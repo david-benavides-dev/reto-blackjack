@@ -1,6 +1,8 @@
 # TODO: 
 # - Cleanup.
 # - Pruebas unitarias siguiendo el cálculo de pruebas válidas y no válidas.
+#
+# - IF TENGO TIEMPO: hacer metodo para barajar el mazo (ni de fly, tengo que cambiar toda la lógica del programa).
 
 from random import randint
 from os import system, name
@@ -195,7 +197,7 @@ def validar_modo_juego(modo_juego: int) -> bool:
     return True
 
 
-def escojer_modo_juego(opcion_modo_juego: int) -> bool:
+def escoger_modo_juego(opcion_modo_juego: int) -> bool:
     """
     Selecciona el modo de juego basado en la opción proporcionada.
 
@@ -231,7 +233,7 @@ def preguntar_modo_juego() -> int:
         try:
             jugadores = pedir_num("\nIntroduzca el modo de juego que deseas: ")
             if validar_modo_juego(jugadores) is True:
-                if escojer_modo_juego(jugadores) == 1:
+                if escoger_modo_juego(jugadores) == 1:
                     return 1
                 return 2
         except ValueError:
@@ -362,9 +364,9 @@ def condicion_victoria(mano_jugador_1: str, mano_jugador_2: str) -> int:
 
     Returns:
         int: El resultado de la partida:
-            - 1 si gana el jugador 1,
-            - 2 si gana el jugador 2,
-            - 3 si hay empate,
+            - 1 si gana el jugador 1.
+            - 2 si gana el jugador 2.
+            - 3 si hay empate.
             - 4 si ambos jugadores se pasan de 21 puntos.
     """
     puntos_jugador_1 = sumar_puntos_jugador(mano_jugador_1)
