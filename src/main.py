@@ -133,7 +133,7 @@ def mostrar_mano_jugador(nombre_jugador: str, mano_jugador: str, resultado_victo
     puntos = sumar_puntos_jugador(mano_jugador)
 
     if puntos > 21 and resultado_victoria == 0:
-        return f"{nombre_jugador} - {mano_jugador} (**se pasa**)"
+        return f"{nombre_jugador} - {mano_jugador} **se pasa**"
     else:
         return f"{nombre_jugador} - {mano_jugador} ({(puntos)})"
 
