@@ -1,9 +1,3 @@
-# TODO: 
-# - Cleanup.
-# - Pruebas unitarias siguiendo el cálculo de pruebas válidas y no válidas.
-#
-# - IF TENGO TIEMPO: hacer metodo para barajar el mazo (ni de fly, tengo que cambiar toda la lógica del programa).
-
 from random import randint
 from os import system, name
 
